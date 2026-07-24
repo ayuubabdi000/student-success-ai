@@ -1,0 +1,88 @@
+body {
+
+    margin:0;
+
+    min-height:100vh;
+
+    background:
+        radial-gradient(
+            ellipse at top,
+            #0a0a0f 0%,
+            #050506 50%,
+            #020203 100%
+        );
+
+    color:#EDEDEF;
+
+    font-family:
+        "Inter",
+        "Geist",
+        system-ui,
+        sans-serif;
+
+    -webkit-font-smoothing:antialiased;
+
+}
+.container {
+
+    width: 90%;
+    margin: auto;
+
+}
+
+
+.dashboard {
+
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+}
+
+
+.section {
+
+    display: flex;
+    gap: 25px;
+    align-items: flex-start;
+
+}
+
+
+.card {
+
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 15px;
+
+    flex: 1;
+
+    box-shadow: 0 5px 20px rgba(0,0,0,.1);
+
+}
+
+
+.card input,
+.card select {
+
+    width: 100%;
+    margin: 8px 0;
+    padding: 12px;
+
+}
+
+
+button {
+
+    width:100%;
+    padding:12px;
+    cursor:pointer;
+
+}
+
+
+.result-area {
+
+    min-height: 300px;
+
+}

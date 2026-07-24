@@ -1,0 +1,6 @@
+Cluster,Login_Frequency,Average_Session_Duration_Min,Video_Completion_Rate,Discussion_Participation,Time_Spent_Hours,Days_Since_Last_Login,Notifications_Checked,Peer_Interaction_Score,Assignments_Submitted,Assignments_Missed,Quiz_Attempts,Quiz_Score_Avg,Project_Grade,Rewatch_Count,App_Usage_Percentage,Reminder_Emails_Clicked
+0,4.34,32.26,60.73,2.07,3.25,19.5,4.77,6.06,4.28,5.62,3.4,70.72,65.8,2.07,66.16,2.05
+1,4.23,31.39,60.27,2.06,2.65,3.92,4.79,6.01,3.06,6.87,3.41,70.71,65.38,2.07,66.05,2.07
+2,4.24,31.07,59.52,1.92,2.53,4.04,4.6,5.92,5.92,3.96,3.27,69.95,64.86,1.94,66.13,1.95
+3,5.31,36.86,67.2,3.14,2.93,4.57,6.53,7.0,6.02,3.86,4.85,80.19,75.28,3.1,72.04,3.13
+4,6.09,39.17,63.41,2.46,9.51,4.52,5.46,6.53,4.74,5.16,3.9,74.89,69.85,2.45,68.98,2.46

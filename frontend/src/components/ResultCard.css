@@ -1,0 +1,274 @@
+
+
+.result {
+
+
+    margin-top:32px;
+
+
+    padding:24px;
+
+
+
+    background:
+
+        linear-gradient(
+            180deg,
+            rgba(255,255,255,.08),
+            rgba(255,255,255,.02)
+        );
+
+
+
+    border:
+
+        1px solid rgba(255,255,255,.06);
+
+
+
+    border-radius:16px;
+
+
+
+    box-shadow:
+
+
+        0 0 0 1px rgba(255,255,255,.02),
+
+        0 20px 40px rgba(0,0,0,.35),
+
+        0 0 50px rgba(94,106,210,.08);
+
+
+
+    animation:
+
+        resultEnter .4s cubic-bezier(.16,1,.3,1);
+
+}
+
+
+
+
+/* Title */
+
+
+.result h3 {
+
+
+    margin:0 0 20px;
+
+
+
+    color:#EDEDEF;
+
+
+
+    font-size:20px;
+
+
+
+    font-weight:600;
+
+
+
+    letter-spacing:-0.02em;
+
+
+}
+
+
+
+
+/* Rows */
+
+
+.result-item {
+
+
+    display:flex;
+
+
+    justify-content:space-between;
+
+
+    align-items:center;
+
+
+
+    padding:14px 0;
+
+
+
+    border-bottom:
+
+        1px solid rgba(255,255,255,.06);
+
+
+}
+
+
+
+.result-item:last-child {
+
+
+    border-bottom:none;
+
+
+}
+
+
+
+/* Label */
+
+
+.result-item span {
+
+
+    color:#8A8F98;
+
+
+    font-size:14px;
+
+
+}
+
+
+
+/* Value */
+
+
+.result-item strong {
+
+
+    color:#EDEDEF;
+
+
+    font-size:15px;
+
+
+    font-weight:500;
+
+
+
+    padding:6px 12px;
+
+
+
+    border-radius:999px;
+
+
+
+    background:
+
+        rgba(94,106,210,.12);
+
+
+
+    border:
+
+        1px solid rgba(94,106,210,.25);
+
+
+
+}
+
+
+
+/* Prediction highlight */
+
+
+.result-item:first-of-type strong {
+
+
+    background:
+
+        linear-gradient(
+            90deg,
+            rgba(94,106,210,.25),
+            rgba(104,114,217,.15)
+        );
+
+
+
+    color:white;
+
+
+}
+
+
+
+/* Animation */
+
+
+@keyframes resultEnter {
+
+
+    from {
+
+
+        opacity:0;
+
+
+        transform:
+
+            translateY(12px)
+
+            scale(.98);
+
+
+    }
+
+
+
+    to {
+
+
+        opacity:1;
+
+
+        transform:
+
+            translateY(0)
+
+            scale(1);
+
+
+    }
+
+
+}
+
+
+
+/* Mobile */
+
+
+@media(max-width:600px){
+
+
+    .result {
+
+
+        padding:20px;
+
+    }
+
+
+
+    .result-item {
+
+
+        flex-direction:column;
+
+
+        align-items:flex-start;
+
+
+        gap:8px;
+
+
+    }
+
+
+}
