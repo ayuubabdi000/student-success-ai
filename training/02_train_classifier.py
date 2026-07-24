@@ -124,7 +124,7 @@ models = {
 
     RandomForestClassifier(
 
-        n_estimators=500,
+        n_estimators=100,
 
         random_state=RANDOM_STATE,
 
