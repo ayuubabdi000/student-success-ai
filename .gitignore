@@ -12,6 +12,10 @@ frontend/dist/
 .env
 .env.*
 
+.env.local
+
 # OS
 .DS_Store
 Thumbs.db
+.vercel
+.env*
