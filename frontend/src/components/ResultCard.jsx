@@ -1,19 +1,25 @@
 import "./ResultCard.css";
 
-function ResultCard({result}){
 
-    return(
+function ResultCard({ result }) {
+
+
+    return (
 
         <div className="result">
+
 
             <h3>
                 Prediction Result
             </h3>
 
 
+
             <div className="result-item">
 
-                <span>Label</span>
+                <span>
+                    Status
+                </span>
 
                 <strong>
                     {result.label}
@@ -22,9 +28,12 @@ function ResultCard({result}){
             </div>
 
 
+
             <div className="result-item">
 
-                <span>Confidence</span>
+                <span>
+                    Confidence
+                </span>
 
                 <strong>
                     {result.confidence}
@@ -33,15 +42,19 @@ function ResultCard({result}){
             </div>
 
 
+
             <div className="result-item">
 
-                <span>Model</span>
+                <span>
+                    Prediction Code
+                </span>
 
                 <strong>
-                    {result.model}
+                    {result.prediction}
                 </strong>
 
             </div>
+
 
 
         </div>
@@ -49,5 +62,6 @@ function ResultCard({result}){
     );
 
 }
+
 
 export default ResultCard;

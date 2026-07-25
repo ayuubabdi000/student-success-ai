@@ -3,6 +3,7 @@
 venv/
 __pycache__/
 *.pyc
+
 models/random_forest.joblib
 # React
 frontend/node_modules/

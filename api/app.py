@@ -2,6 +2,7 @@ import os
 import joblib
 import pandas as pd
 
+
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
@@ -10,7 +11,7 @@ from fastapi.responses import JSONResponse
 # APP
 # =========================
 
-app = FastAPI(title="Student Success Classifier API", version="1.0")
+app = FastAPI(title="Student Success Prediction API", version="1.0")
 
 
 app.add_middleware(
@@ -26,6 +27,7 @@ app.add_middleware(
 # PATHS
 # =========================
 
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
@@ -33,26 +35,23 @@ MODEL_DIR = os.path.join(BASE_DIR, "../models")
 
 
 # =========================
-# LOAD MODELS
+# LOAD CLASSIFICATION MODEL
 # =========================
 
-MODELS = {
-    "lr": joblib.load(os.path.join(MODEL_DIR, "logistic_regression.joblib")),
-    "rf": joblib.load(os.path.join(MODEL_DIR, "random_forest.joblib")),
-}
+
+MODEL_PATH = os.path.join(MODEL_DIR, "student_success_model.joblib")
 
 
-# =========================
-# FEATURES
-# =========================
+MODEL = joblib.load(MODEL_PATH)
+
 
 FEATURES = joblib.load(os.path.join(MODEL_DIR, "classification_features.pkl"))
-scaler = joblib.load(os.path.join(MODEL_DIR, "student_scaler.pkl"))
 
 
 # =========================
-# CLUSTER MODELS
+# LOAD CLUSTER MODEL
 # =========================
+
 
 CLUSTER_MODEL = joblib.load(os.path.join(MODEL_DIR, "student_cluster_model.pkl"))
 
@@ -75,33 +74,19 @@ CLUSTER_PROFILES = pd.read_csv(os.path.join(MODEL_DIR, "cluster_profiles.csv"))
 def home():
 
     return {
-        "message": "Student Success Classifier API",
-        "models": ["lr", "rf"],
-        "endpoint": "POST /predict?model=rf",
+        "message": "Student Success Prediction API",
+        "model": "best_model",
+        "endpoints": ["/predict", "/cluster"],
     }
 
 
 # =========================
-# PREDICT
+# CLASSIFICATION
 # =========================
 
 
 @app.post("/predict")
 async def predict(request: Request):
-
-    # choose model
-
-    choice = request.query_params.get("model", "rf").lower()
-
-    if choice not in MODELS:
-
-        return JSONResponse(
-            status_code=400, content={"error": "Use model=lr or model=rf"}
-        )
-
-    model = MODELS[choice]
-
-    # safely read json
 
     try:
 
@@ -109,51 +94,45 @@ async def predict(request: Request):
 
     except:
 
-        return JSONResponse(status_code=400, content={"error": "Invalid JSON body"})
+        return JSONResponse(status_code=400, content={"error": "Invalid JSON"})
 
-    # check features
+    # Check features
 
-    missing = [feature for feature in FEATURES if feature not in data]
+    missing = [f for f in FEATURES if f not in data]
 
     if missing:
 
-        return JSONResponse(status_code=400, content={"missing": missing})
+        return JSONResponse(status_code=400, content={"missing_features": missing})
 
     try:
 
-        # dataframe
-
         x = pd.DataFrame([data])
 
-        # same order as training
 
         x = x[FEATURES]
 
-        # prediction
+        prediction = int(MODEL.predict(x)[0])
 
-        pred = int(model.predict(x)[0])
+        label = "Completed" if prediction == 1 else "Not Completed"
 
-        label = "Completed" if pred == 1 else "Not Completed"
+        response = {"prediction": prediction, "label": label}
 
-        response = {
-            "model": ("logistic_regression" if choice == "lr" else "random_forest"),
-            "prediction": pred,
-            "label": label,
-        }
+        if hasattr(MODEL, "predict_proba"):
 
-        # confidence
+            probability = MODEL.predict_proba(x)[0]
 
-        if hasattr(model, "predict_proba"):
-
-            probs = model.predict_proba(x)[0]
-
-            response["confidence"] = round(float(probs[pred]), 3)
+            response["confidence"] = round(float(probability[prediction]), 3)
 
         return response
 
     except Exception as e:
 
         return JSONResponse(status_code=500, content={"error": str(e)})
+
+
+# =========================
+# CLUSTERING
+# =========================
 
 
 @app.post("/cluster")
@@ -167,7 +146,7 @@ async def cluster(request: Request):
 
         if missing:
 
-            return JSONResponse(status_code=400, content={"missing": missing})
+            return JSONResponse(status_code=400, content={"missing_features": missing})
 
         x = pd.DataFrame([data])
 
@@ -184,4 +163,8 @@ async def cluster(request: Request):
     except Exception as e:
 
         return JSONResponse(status_code=500, content={"error": str(e)})
-print(FEATURES)
+
+
+
+
+print("Classification Features:", FEATURES)

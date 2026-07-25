@@ -1,52 +1,129 @@
-import { useState } from "react";
-import { clusterFeatures } from "./features";
+import { useState, useRef } from "react";
+import { clusterFeatures, randomStudent } from "./features";
 import { cluster } from "./services/api";
 import "./PredictionForm.css";
 
 function ClusterForm() {
 
-    const init = {};
+    const initial = {};
 
-    clusterFeatures.forEach(f => init[f] = "");
+    clusterFeatures.forEach(feature => {
+        initial[feature] = "";
+    });
 
-    const [form, setForm] = useState(init);
-
+    const [form, setForm] = useState(initial);
     const [result, setResult] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [missingFields, setMissingFields] = useState([]);
+
+
+    const inputRefs = useRef({});
+    const handleEnter = (e, index) => {
+
+        if (e.key === "Enter") {
+
+            e.preventDefault();
+
+            const next =
+                inputRefs.current[
+                clusterFeatures[index + 1]
+                ];
+
+            if (next) {
+                next.focus();
+            } else {
+                submit();
+            }
+        }
+    };
+    const fillRandom = () => {
+
+        setForm(randomStudent);
+
+    };
 
 
     const submit = async () => {
 
-        const payload = {};
+        const missing = clusterFeatures.filter(
+            feature => form[feature] === ""
+        );
 
-        for (const k in form)
-            payload[k] = Number(form[k]);
+        if (missing.length > 0) {
 
+            setMissingFields(missing);
 
-        const res = await cluster(payload);
+            inputRefs.current[missing[0]]?.focus();
 
-        setResult(res.data);
+            return;
+        }
+
+        setMissingFields([]);
+
+        try {
+
+            setLoading(true);
+
+            const payload = {};
+
+            for (const key in form) {
+                payload[key] = Number(form[key]);
+            }
+
+            const res = await cluster(payload);
+
+            setResult(res.data);
+
+        } catch (error) {
+
+            console.error(error);
+
+            alert("Failed to analyze cluster.");
+
+        } finally {
+
+            setLoading(false);
+
+        }
+    };
+    const clearForm = () => {
+
+        const emptyForm = {};
+
+        clusterFeatures.forEach(feature => {
+            emptyForm[feature] = "";
+        });
+
+        setForm(emptyForm);
+        setResult(null);
+        setMissingFields([]);
 
     };
-
 
     return (
 
         <div className="section">
 
-
-            {/* Cluster Input Form */}
-
             <div className="card">
 
-                <h2>Cluster Analysis</h2>
-
+                <h2>Student Cluster Type Analysis</h2>
 
                 {
-                    clusterFeatures.map(feature =>
+                    clusterFeatures.map((feature, index) => (
 
                         <input
 
                             key={feature}
+
+                            ref={(el) =>
+                                inputRefs.current[feature] = el
+                            }
+
+                            className={
+                                missingFields.includes(feature)
+                                    ? "input-error"
+                                    : ""
+                            }
 
                             type="number"
 
@@ -54,7 +131,11 @@ function ClusterForm() {
 
                             value={form[feature]}
 
-                            onChange={(e)=>
+                            onKeyDown={(e) =>
+                                handleEnter(e, index)
+                            }
+
+                            onChange={(e) => {
 
                                 setForm({
 
@@ -62,83 +143,76 @@ function ClusterForm() {
 
                                     [feature]: e.target.value
 
-                                })
+                                });
 
-                            }
+                                setMissingFields(
+                                    missingFields.filter(
+                                        item => item !== feature
+                                    )
+                                );
+
+                            }}
 
                         />
 
-                    )
+                    ))
                 }
 
+                <button
 
-                <button onClick={submit}>
+                    onClick={submit}
 
-                    Analyze Cluster
+                    disabled={loading}
+
+                >
+
+                    {
+                        loading
+                            ? "Analyzing..."
+                            : "Analyze Cluster"
+                    }
 
                 </button>
-
+                <button onClick={fillRandom}>
+                    Random Student
+                </button>
+                <button onClick={clearForm}>
+                    Clear Form
+                </button>
 
             </div>
-
-
-
-            {/* Cluster Result */}
 
             <div className="card result-area">
 
-                <h2>Student Result</h2>
-
+                <h2>Result</h2>
 
                 {
 
-                    result ?
+                    result
 
-                    <div className="result">
+                        ?
 
-                        <h3>
-                            Cluster {result.cluster}
-                        </h3>
+                        <div className="result">
 
+                            <h3>
 
-                        {
+                                Cluster {result.cluster}
 
-                        result.cluster === 0 ?
+                            </h3>
 
-                        <p>
-                            Student is in Low Engagement Group
-                        </p>
-
-                        :
-
-                        result.cluster === 1 ?
-
-                        <p>
-                            Student is in Active Learning Group
-                        </p>
+                        </div>
 
                         :
 
                         <p>
-                            Student belongs to Cluster {result.cluster}
+
+                            No analysis yet
+
                         </p>
-
-                        }
-
-
-                    </div>
-
-                    :
-
-                    <p>
-                        No cluster analysis yet
-                    </p>
 
                 }
 
-
             </div>
-
 
         </div>
 
@@ -147,3 +221,6 @@ function ClusterForm() {
 }
 
 export default ClusterForm;
+
+
+

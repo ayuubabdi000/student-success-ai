@@ -354,4 +354,19 @@
     }
 
 
+
+}
+.input-error {
+
+    border: 2px solid red;
+
+}
+
+
+.input-error:focus {
+
+    outline: none;
+
+    border: 2px solid orange;
+
 }
