@@ -99,7 +99,7 @@ function ClusterForm() {
         setMissingFields([]);
 
     };
-
+    console.log("CLUSTER RESULT:", result);
     return (
 
         <div className="section">
@@ -203,6 +203,7 @@ function ClusterForm() {
                                 <p>
                                     Cluster ID: {result.cluster}
                                 </p>
+                                
 
                             </div>
 
