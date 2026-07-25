@@ -15,15 +15,15 @@ app = FastAPI(title="Student Success Prediction API", version="1.0")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-         "https://student-success-ai-71cy-gd2c2yme4-ayub8.vercel.app",
-         "https://student-success-ai.vercel.app"
-         
+        "https://student-success-ai-71cy-3qb1pucua-ayub8.vercel.app",
+        "https://student-success-ai.vercel.app"
     ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
-    
 )
+    
+
 
 # =========================
 # PATHS & ARTIFACT LOADING
