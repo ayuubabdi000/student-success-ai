@@ -101,6 +101,8 @@ function PredictionForm() {
 
 
             }
+            console.log("PAYLOAD SENT:", payload);
+
 
 
 

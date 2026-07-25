@@ -12,7 +12,6 @@ export const predictionFeatures = [
   "Quiz_Attempts",
   "Quiz_Score_Avg",
   "Project_Grade",
-  "Progress_Percentage",
   "Rewatch_Count",
   "App_Usage_Percentage",
   "Reminder_Emails_Clicked",
@@ -63,8 +62,7 @@ export const randomStudent = {
   Project_Grade:
     Math.floor(Math.random() * 30) + 70,
 
-  Progress_Percentage:
-    Math.floor(Math.random() * 30) + 70,
+
 
   Rewatch_Count:
     Math.floor(Math.random() * 10),
