@@ -41,7 +41,13 @@ CLUSTER_FEATURES: List[str] = joblib.load(
     os.path.join(MODEL_DIR, "cluster_features.pkl")
 )
 CLUSTER_PROFILES = pd.read_csv(os.path.join(MODEL_DIR, "cluster_profiles.csv"))
-
+CLUSTER_NAMES = {
+    0: "Excellent Student",
+    1: "At Risk Student",
+    2: "Average Student",
+    3: "Active Student",
+    4: "Low Engagement Student",
+}
 print("Classification Features Loaded:", len(FEATURES))
 print("Cluster Features Loaded:", len(CLUSTER_FEATURES))
 
@@ -106,7 +112,11 @@ async def cluster(payload: ClusterRequest):
 
         profile = CLUSTER_PROFILES[CLUSTER_PROFILES["Cluster"] == cluster_id]
 
-        return {"cluster": cluster_id, "profile": profile.to_dict(orient="records")}
+        return {
+            "cluster": cluster_id,
+            "student_type": CLUSTER_NAMES[cluster_id],
+            "profile": profile.to_dict(orient="records"),
+        }
 
     except Exception as e:
         raise HTTPException(
