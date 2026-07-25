@@ -30,7 +30,7 @@ from sklearn.metrics import (
 
 DATA_PATH = "../dataset/clean_Student.csv"
 
-MODEL_DIR = "../models"
+MODEL_DIR = "/api/models"
 
 RANDOM_STATE = 42
 

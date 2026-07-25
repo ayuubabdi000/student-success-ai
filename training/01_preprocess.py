@@ -84,21 +84,21 @@ df["Completed"] = df["Completed"].map(
 # SAVE
 # ===============================
 
-os.makedirs(
-    "./dataset",
-    exist_ok=True
-)
+# os.makedirs(
+#     "./dataset",
+#     exist_ok=True
+# )
 
 
-df.to_csv(
-    OUTPUT_PATH,
-    index=False
-)
+# df.to_csv(
+#     OUTPUT_PATH,
+#     index=False
+# )
 
 
 
-print("\nClean dataset saved")
-print("Final shape:", df.shape)
+# print("\nClean dataset saved")
+# print("Final shape:", df.shape)
 
-print("\nColumns:")
-print(df.columns.tolist())
+# print("\nColumns:")
+# print(df.columns.tolist())

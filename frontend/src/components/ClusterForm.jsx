@@ -194,11 +194,17 @@ function ClusterForm() {
 
                         <div className="result">
 
-                            <h3>
+                            <div className="result">
 
-                                Cluster {result.cluster}
+                                <h3>
+                                    {result.student_type}
+                                </h3>
 
-                            </h3>
+                                <p>
+                                    Cluster ID: {result.cluster}
+                                </p>
+
+                            </div>
 
                         </div>
 

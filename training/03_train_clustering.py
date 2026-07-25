@@ -19,7 +19,7 @@ from sklearn.metrics import (
 
 DATA_PATH = "../dataset/clean_Student.csv"
 
-MODEL_DIR = "../models"
+MODEL_DIR = "/api/models"
 
 RANDOM_STATE = 42
 
@@ -254,11 +254,11 @@ print(
 
 
 
-profiles.to_csv(
+# profiles.to_csv(
 
-    f"{MODEL_DIR}/cluster_profiles.csv"
+#     f"{MODEL_DIR}/cluster_profiles.csv"
 
-)
+# )
 
 
 
@@ -267,31 +267,31 @@ profiles.to_csv(
 # ===============================
 
 
-joblib.dump(
+# joblib.dump(
 
-    kmeans,
+#     kmeans,
 
-    f"{MODEL_DIR}/student_cluster_model.pkl"
+#     f"{MODEL_DIR}/student_cluster_model.pkl"
 
-)
-
-
-joblib.dump(
-
-    scaler,
-
-    f"{MODEL_DIR}/student_scaler.pkl"
-
-)
+# )
 
 
-joblib.dump(
+# joblib.dump(
 
-    FEATURES,
+#     scaler,
 
-    f"{MODEL_DIR}/cluster_features.pkl"
+#     f"{MODEL_DIR}/student_scaler.pkl"
 
-)
+# )
+
+
+# joblib.dump(
+
+#     FEATURES,
+
+#     f"{MODEL_DIR}/cluster_features.pkl"
+
+# )
 
 
 
@@ -300,20 +300,20 @@ joblib.dump(
 # ===============================
 
 
-df.to_csv(
+# df.to_csv(
 
-    "../dataset/student_clustered.csv",
+#     "../dataset/student_clustered.csv",
 
-    index=False
+#     index=False
 
-)
+# )
 
 
 
-print(
-    "\nClustering completed"
-)
+# print(
+#     "\nClustering completed"
+# )
 
-print(
-    "Models saved"
-)
+# print(
+#     "Models saved"
+# )
