@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import { clusterFeatures, randomStudent } from "./features";
-import { cluster } from "./services/api";
+import { cluster } from "../components/services/api";
 import "./PredictionForm.css";
 
 function ClusterForm() {

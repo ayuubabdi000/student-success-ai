@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import { predictionFeatures, randomStudent } from "./features";
-import { predict } from "./services/api";
+import { predict } from "../components/services/api";
 import ResultCard from "./ResultCard";
 import "./PredictionForm.css";
 
