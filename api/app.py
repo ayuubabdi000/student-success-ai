@@ -14,10 +14,14 @@ app = FastAPI(title="Student Success Prediction API", version="1.0")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[
+         "http://localhost:5173",
+         "https://student-success-ai-71cy-gd2c2yme4-ayub8.vercel.app"
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+    
 )
 
 # =========================
