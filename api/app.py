@@ -14,7 +14,7 @@ app = FastAPI(title="Student Success Prediction API", version="1.0")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origin_regex=r"https://student-success-ai-71cy-.*-ayub8\.vercel\.app"
+    allow_origin_regex=r"https://student-success-ai-71cy-.*-ayub8\.vercel\.app",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -73,11 +73,11 @@ def home():
     return {
         "message": "Student Success Prediction API",
         "model": "best_model",
-        "endpoints": ["/predict", "/cluster"],
+        "endpoints": ["/api/predict", "/api/cluster"],
     }
 
 
-@app.post("/predict")
+@app.post("/api/predict")
 async def predict(payload: PredictRequest):
     try:
         # Convert Pydantic model to DataFrame using specified feature order
@@ -101,7 +101,7 @@ async def predict(payload: PredictRequest):
         )
 
 
-@app.post("/cluster")
+@app.post("/api/cluster")
 async def cluster(payload: ClusterRequest):
     try:
         data_dict = payload.model_dump()

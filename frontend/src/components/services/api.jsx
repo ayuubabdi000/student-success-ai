@@ -5,10 +5,10 @@ const api = axios.create({
 });
 
 export const predict = (data) =>
-    api.post("/predict", data);
+    api.post("/api/predict", data);
 
 export const cluster = (data) =>
-    api.post("/cluster", data);
+    api.post("/api/cluster", data);
 
 
 export default api;
