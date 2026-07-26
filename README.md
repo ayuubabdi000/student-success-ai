@@ -432,28 +432,9 @@ During this project I learned:
 - Building a complete ML system requires combining data science, backend engineering, and frontend development.
 
 
----
 
-# 🙏 Thank You
+# 👤 Author
 
-I would like to sincerely thank my instructor and the lab team for their guidance, support, and dedication throughout this machine learning journey.
-
-This project gave me the opportunity to apply real-world skills in:
-
-- Machine Learning model development
-- Data preprocessing and feature engineering
-- Model evaluation
-- FastAPI deployment
-- React frontend development
-- Building complete AI applications
-
-I truly appreciate the lessons, feedback, and practical experience provided during this course. The knowledge and support from the instructors and Goobolabs, helped me improve as a developer and build confidence in creating real-world projects.
-
-Thank you for creating a supportive learning environment where students can experiment, solve problems, and grow.
-
-**With gratitude,**  
-Ayuub
-
----
+## Ayuub
 
 
