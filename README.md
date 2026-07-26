@@ -16,7 +16,7 @@
 
 
 ---
-### 🚀 [View Live Demo](https://student-success-ai-71cy-bvnqytjgm-ayub8.vercel.app/)
+### 🚀 [View Live Demo](https://student-success-ai-71cy.vercel.app/)
 ---
 
 
